@@ -4,7 +4,7 @@ resource "aws_ecs_cluster" "main" {
 
 resource "aws_lb" "main" {
   name               = "${var.env}-lb"
-  internal           = false
+  internal           = true
   load_balancer_type = "application"
   subnets            = var.public_subnet_ids
   security_groups    = [var.security_group_id]
@@ -21,7 +21,7 @@ resource "aws_ecs_task_definition" "task" {
   container_definitions = jsonencode([
     {
       name      = "ecs-test"
-      image     = "063278365990.dkr.ecr.ap-south-1.amazonaws.com/ecs-test"
+      image     = "063278365990.dkr.ecr.us-east-1.amazonaws.com/ecs-test"
       essential = true
       portMappings = [
         {
